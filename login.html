@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>تسجيل الدخول - شركة الناقوري</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>تسجيل الدخول</h2>
+    <input type="text" id="username" placeholder="اسم المستخدم" />
+    <input type="password" id="password" placeholder="كلمة المرور" />
+    <button onclick="login()">دخول</button>
+    <div class="error" id="errorMsg"></div>
+  </div>
+
+  <script>
+    const users = [
+      { username: "alaa", password: "2392003", role: "مدير" },
+      { username: "alaa2", password: "2392003", role: "موظف" },
+      { username: "employee2", password: "password2", role: "موظف" }
+    ];
+
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+
+      const user = users.find(u => u.username === username && u.password === password);
+
+      if(user) {
+        localStorage.setItem('loggedUser', JSON.stringify(user));
+        window.location.href = 'index.html';
+      } else {
+        errorMsg.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+      }
+    }
+  </script>
+
+</body>
+</html>
